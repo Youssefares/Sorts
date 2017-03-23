@@ -28,7 +28,8 @@ def merge(a:[int], aux:[int], lo:int, mid:int, hi:int):
 
     #TODO: can we get rid of this?
     aux = list(a)
-    print(aux)
+
+
     i = lo
     j = mid+1
     for k in range(lo, hi+1):
@@ -47,8 +48,3 @@ def merge(a:[int], aux:[int], lo:int, mid:int, hi:int):
         else:
             a[k] = aux[i]
             i += 1
-
-l = [242, 25, 500, 32, 15, 50, 234, 234, -543, -234, 2, 30]
-
-merge_sort(l)
-assert is_sorted(l)
