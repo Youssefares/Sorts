@@ -1,8 +1,5 @@
 #TODO: can we modify this so that it doesn't move so much data arround
 def merge(a:[int], aux:[int], lo:int, mid:int, hi:int):
-    assert is_sorted(a, lo, mid)
-    assert is_sorted(a, mid+1, hi)
-
     #TODO: can we get rid of this?
     aux = list(a)
 

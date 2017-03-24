@@ -5,7 +5,7 @@ class BST:
     def __init__(self):
         self.root = None
 
-    #insert
+
     def insert(self, key):
         # if root, just root = node with parent: None
         if self.root == None:
@@ -31,6 +31,10 @@ class BST:
                 node = node.parent
 
 
+    def find(self,key)->BSTNode:
+        return find(self.root, key)
+
+
     def min(self):
         #go left till min
         node = self.root
@@ -38,9 +42,27 @@ class BST:
             node = node.left
         return node.key
 
+
     def max(self):
         #go right till max
         node = self.root
         while(node.right is not None):
             node = node.right
         return node.key
+
+    def delete(self, key)->bool:
+        result = find(self.root, key)
+        if result == None:
+            return False
+        else:
+            #Found it.
+            if result.right is not None:
+                result.key = result.right.key
+                result.right = None
+            elif result.left is not None:
+                result.key = result.left.key
+                result.left = None
+            else:
+                result = None
+
+            return True;

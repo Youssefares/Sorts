@@ -1,9 +1,3 @@
-def height(node:'BSTNode'):
-    if node is None:
-        return -1
-    else:
-        return node.height
-
 class BSTNode:
     def __init__(self, key, left:'BSTNode', right:'BSTNode', parent:'BSTNode'):
         self.key = key
@@ -14,3 +8,20 @@ class BSTNode:
 
     def update_height(self):
         self.height = max(height(self.left), height(self.right)) + 1
+
+
+
+def height(node:'BSTNode'):
+    if node is None:
+        return -1
+    else:
+        return node.height
+
+
+def find(node:'BSTNode', key)->BSTNode:
+    if node == None or node.key == key:
+        return node
+    if key > node.key:
+        return find(node.right, key)
+    if key < node.key:
+        return find(node.left, key)
