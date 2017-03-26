@@ -1,4 +1,4 @@
-def merge(a:[int], aux:[int], lo:int, mid: int, hi:int):
+def merge(a, aux, lo:int, mid: int, hi:int):
 
     #TODO: can we get rid of this?
     for i in range(lo, hi+1):

@@ -49,19 +49,20 @@ class BST:
         while(node.right is not None):
             node = node.right
         return node.key
-
-    #TODO: make sure this is broken, fix it.
-    def delete(self, key)->bool:
-        result = find(self.root, key)
-        if result == None:
-            return False
-        else:
-            #Found it.
-            if result.right is not None:
-                #TODO
-            elif result.left is not None:
-                #TODO
-            else:
-                result = None
-
-            return True;
+        
+    #
+    # #TODO: make sure this is broken, fix it.
+    # def delete(self, key)->bool:
+    #     result = find(self.root, key)
+    #     if result == None:
+    #         return False
+    #     else:
+    #         #Found it.
+    #         if result.right is not None:
+    #             #TODO
+    #         elif result.left is not None:
+    #             #TODO
+    #         else:
+    #             result = None
+    #
+    #         return True;
