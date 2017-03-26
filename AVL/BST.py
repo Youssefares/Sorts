@@ -50,6 +50,7 @@ class BST:
             node = node.right
         return node.key
 
+    #TODO: make sure this is broken, fix it.
     def delete(self, key)->bool:
         result = find(self.root, key)
         if result == None:
@@ -57,11 +58,9 @@ class BST:
         else:
             #Found it.
             if result.right is not None:
-                result.key = result.right.key
-                result.right = None
+                #TODO
             elif result.left is not None:
-                result.key = result.left.key
-                result.left = None
+                #TODO
             else:
                 result = None
 

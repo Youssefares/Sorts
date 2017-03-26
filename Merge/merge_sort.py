@@ -1,10 +1,12 @@
 from Merge.merge import merge
 
 sentinel = object()
-def merge_sort(a:[int], aux:[int]=None, lo:int=0, hi:int=sentinel):
+def merge_sort(a:[int], aux:[int]=sentinel, lo:int=0, hi:int=sentinel):
     #just initializing hi for the 1st callback
     if hi is sentinel:
         hi = len(a)-1
+    if aux is sentinel:
+        aux = [None] * (hi+1)
 
     #Base case
     if hi <= lo:

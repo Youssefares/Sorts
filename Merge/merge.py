@@ -1,8 +1,8 @@
-#TODO: can we modify this so that it doesn't move so much data arround
-def merge(a:[int], aux:[int], lo:int, mid:int, hi:int):
-    #TODO: can we get rid of this?
-    aux = list(a)
+def merge(a:[int], aux:[int], lo:int, mid: int, hi:int):
 
+    #TODO: can we get rid of this?
+    for i in range(lo, hi+1):
+        aux[i] = a[i]
 
     i = lo
     j = mid+1
