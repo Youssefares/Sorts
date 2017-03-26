@@ -1,3 +1,9 @@
+import KnuthShuffle
+
+def run_quicksort(arr):
+    KnuthShuffle.knuth_shuffle(arr)
+    quicksort(arr, 0, len(arr)-1)
+
 def quicksort(arr, left, right):
     if left >= right:
         return
@@ -26,9 +32,3 @@ def partn(arr, left, right, pivot):
 
     return left
 
-
-# Test
-arr = [2, 8, 7, 1, 3, 5, 6, 4]
-print("Array before sorting: {}".format(arr))
-quicksort(arr, 0, len(arr) - 1)
-print("Array after sorting: {}".format(arr))
