@@ -7,6 +7,8 @@ import random
 from AVL.BST import BST
 from Merge.merge_sort import merge_sort
 from is_sorted import is_sorted
+from min_heap_invariant import is_min_heap
+from PriorityQ.min_heap import MinHeap
 
 class BSTTestCase(unittest.TestCase):
 
@@ -67,6 +69,16 @@ class MergeSortTestCase(unittest.TestCase):
         end = time.time()
         self.assertTrue(is_sorted(self.arr))
         print("MergeSort Time: {0} for N = {1}".format(end-start, self.N))
+
+
+class HeapSortTestCase(unittest.TestCase):
+    def setUp(self):
+        self.N = pow(2,20)
+        self.arr = random.sample(range(-523000, 14252000), self.N)
+
+    def test_build_max_heap_works(self):
+        h = MinHeap(self.arr)
+        self.assertTrue(is_min_heap(h.arr))
 
 
 unittest.main()
