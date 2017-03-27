@@ -9,10 +9,10 @@ Just some simple sorting algorithms.
 - [x] Mergesort
 - [x] BubbleSort
 - [ ] Test all algorithms
-- [ ] Plot relationship between time vs. size
-- [ ] Graphical illustrations for algos operation
+- [x] Plot relationship between time vs. size
 
 ## EXTRAS:
 - [ ] In place Merge?
 - [ ] Fancy Priority Queue?
 - [ ] 3-Way QuickSort?
+- [ ] Graphical illustrations for algos operation
