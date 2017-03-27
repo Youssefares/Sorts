@@ -1,4 +1,4 @@
-import KnuthShuffle
+from Quicksort import KnuthShuffle
 
 
 def quicksort(arr):
@@ -30,7 +30,7 @@ def partn(arr, left, right):
         arr[i], arr[j] = arr[j], arr[i] # swap elements
         i += 1
         j -= 1
-    
+
     arr[left], arr[j] = arr[j], arr[left]
     return j
 
