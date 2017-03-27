@@ -4,6 +4,7 @@ import matplotlib.pyplot as plot
 from Merge.merge_sort import merge_sort
 from Quicksort.Quicksort import quicksort
 from BubbleSort.BubbleSort import bubble_sort
+from PriorityQ.HeapSort import heap_sort
 
 def generate_testcase(N):
     rand_list = random.sample(range(-523000, 14252000), N)
@@ -20,7 +21,7 @@ def calc_time(list, fn):
 
 # TODO: ADD HEAPSORT TO LIST
 def compare_sorts():
-    function_list = [merge_sort, quicksort, bubble_sort]
+    function_list = [merge_sort, quicksort, bubble_sort, heap_sort]
     function_times = []
     for i in range(len(function_list)):
         function_times.append([])
@@ -42,7 +43,8 @@ def compare_sorts():
         plot.plot(n_list, function_times[i], plot_colors[i]+'-', label = function_list[i].__name__)
         plot.plot(n_list, function_times[i], plot_colors[i] + 'o')
 
-    plot.axis([100, 4900, 0, 100])
+
+    plot.axis([100, 4900, 0, 400])
     plot.xlabel('Sample size')
     plot.ylabel('Run time (ms)')
     plot.legend()
