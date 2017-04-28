@@ -7,6 +7,7 @@ import random
 from AVL.BST import BST
 from Merge.merge_sort import merge_sort
 from is_sorted import is_sorted
+from BST_invariant import is_in_order
 from min_heap_invariant import is_min_heap
 from PriorityQ.min_heap import MinHeap
 
@@ -15,7 +16,8 @@ class BSTTestCase(unittest.TestCase):
     #get random numbers, their min & max, and insert them in the BST.
     def setUp(self):
         self.tree = BST()
-        self.arr = random.sample(range(-1000,1000),30)
+        self.arr = random.sample(range(-1000,10000000),4000)
+        self.avl_sorted_arr = []
         self.min = self.max = self.arr[0]
         for a in self.arr:
             self.tree.insert(a)
@@ -38,11 +40,29 @@ class BSTTestCase(unittest.TestCase):
         self.assertTrue(self.tree.find(self.arr[23]) is not None)
         self.assertTrue(self.tree.find(2000) is None)
 
-    # def test_tree_delete_works(self):
-    #     doomed = self.arr[13]
-    #     self.assertTrue(self.tree.find(doomed) is not None)
-    #     self.assertTrue(self.tree.delete(doomed))
-    #     self.assertTrue(self.tree.find(doomed) is None)
+    def test_tree_traversal(self):
+        self.assertTrue(is_in_order(self.tree))
+
+    def test_tree_delete_works(self):
+        doomed = self.arr[13]
+        #should find it
+        self.assertTrue(self.tree.find(doomed) is not None)
+        #should delete it
+        self.assertTrue(self.tree.delete(doomed))
+        #should have in-order property
+        self.assertTrue(is_in_order(self.tree))
+        #should no longer find it
+        self.assertTrue(self.tree.find(doomed) is None)
+        #should not be able to delete it again (no duplicates)
+        self.assertFalse(self.tree.delete(doomed))
+        #should insert just fine
+        self.tree.insert(doomed)
+        #should find it again
+        self.assertTrue(self.tree.find(doomed) is not None)
+        #should still have in-order property
+        self.assertTrue(is_in_order(self.tree))
+
+
 
 
 

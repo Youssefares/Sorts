@@ -4,6 +4,7 @@ class BST:
     """ Naive implementation of a Height Augmented Binary Search Tree """
     def __init__(self):
         self.root = None
+        self.stack = None
 
 
     def insert(self, key):
@@ -37,9 +38,7 @@ class BST:
 
     def min(self):
         #go left till min
-        node = self.root
-        while(node.left is not None):
-            node = node.left
+        node = min(self.root)
         return node.key
 
 
@@ -49,20 +48,33 @@ class BST:
         while(node.right is not None):
             node = node.right
         return node.key
-        
-    #
-    # #TODO: make sure this is broken, fix it.
-    # def delete(self, key)->bool:
-    #     result = find(self.root, key)
-    #     if result == None:
-    #         return False
-    #     else:
-    #         #Found it.
-    #         if result.right is not None:
-    #             #TODO
-    #         elif result.left is not None:
-    #             #TODO
-    #         else:
-    #             result = None
-    #
-    #         return True;
+
+
+    def delete(self, key)->bool:
+        result = find(self.root, key)
+        if result == None:
+            return False
+        else:
+            delete(result)
+            return True
+
+    def __iter__(self):
+        self.stack = []
+        node = self.root
+        while node is not None:
+            self.stack.append(node)
+            node = node.left
+        return self
+
+    def __next__(self):
+        if len(self.stack) == 0:
+            raise StopIteration
+        else:
+            node = self.stack.pop()
+            next = node.key
+            if node.right is not None:
+                node = node.right
+                while node is not None:
+                    self.stack.append(node)
+                    node = node.left
+            return next
