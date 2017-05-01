@@ -36,6 +36,7 @@ def min(node: BSTNode)->BSTNode:
         node = node.left
     return node
 
+# returns deleted node parent
 def delete(node: BSTNode):
     #When the parent dies, the grandpa has to be a parent to the children.
     grandpa = node.parent
@@ -46,6 +47,7 @@ def delete(node: BSTNode):
             grandpa.right = None
         else:
             grandpa.left = None
+        return grandpa
 
     #if has one child: left, set parent to be grandpa, set corresponding child of grandpa to be child
     elif node.right is None:
@@ -56,6 +58,7 @@ def delete(node: BSTNode):
             grandpa.right = moving_node
         else:
             grandpa.left = moving_node
+        return grandpa
 
     #if has one child: right, set parent to be grandpa, set corresponding child of grandpa to be child
     elif node.left is None:
@@ -66,6 +69,7 @@ def delete(node: BSTNode):
             grandpa.right = moving_node
         else:
             grandpa.left = moving_node
+        return grandpa
 
     #if has both children
     else:
@@ -74,4 +78,4 @@ def delete(node: BSTNode):
         #replace keys with node to be removed
         node.key = moving_nowhere_node.key
         #delete that min in right sub-tree
-        delete(moving_nowhere_node)
+        return delete(moving_nowhere_node)

@@ -67,7 +67,8 @@ class BST:
         if result == None:
             return False
         else:
-            delete(result)
+            node = delete(result)
+            self.update_heights(self, node)
             return True
 
     def __iter__(self):

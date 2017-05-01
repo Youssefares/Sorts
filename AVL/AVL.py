@@ -1,11 +1,11 @@
 # TODO:
 # [x] Search
-# [ ] Insert
+# [x] Insert
 # [ ] Delete
 # [x] Print Height
 
 from AVL.BST import BST
-# from AVL.BSTNode import *
+from AVL.BSTNode import *
 
 class AVL(BST):
     def __init__(self):
@@ -38,13 +38,33 @@ class AVL(BST):
             rightleft(node)
 
         self.update_heights(self, node)
+        return inserted_node
 
     def delete(self, val):
-        BST.delete(self, val)
-        # rebalance
+        node = BST.delete(self, val)
+        while node is not None:
+            if abs(node.get_balance()) > 1:
+                break
+        if node is None:
+            return
+
+        if height(node.left) > height(node.right):
+            if height(node.left.left) >= height(node.left.right):
+                leftleft(node)
+            else:
+                leftright(node)
+        elif height(node.right) > height(node.left):
+            if height(node.right.right) >= height(node.right.left):
+                rightright(node)
+            else:
+                rightleft(node)
+        self.update_heights(self, node)
+
+
+
 
     def print_height(self):
-        print("Tree's height = ", self.root.height)
+        print("Tree's height = ", height(self.root))
 
 
 def leftleft(node):
