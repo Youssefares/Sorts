@@ -16,7 +16,7 @@ class BST:
         else:
             node = self.root
             ret = None
-            for _ in range(height(self.root)+1):
+            for _ in range(height(self.root)+2):
                 if key > node.key and node.right == None:
                     ret = node.right = BSTNode(key, None, None, node)
                     break
@@ -30,12 +30,7 @@ class BST:
                     node = node.left
                     continue
 
-            #update height all the way up
-            # while(node is not None):
-            #     node.update_height()
-            #     node = node.parent
-            update_heights(node)
-
+            update_heights(node.parent)
             return ret
 
 

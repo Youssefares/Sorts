@@ -76,9 +76,11 @@ def delete(node: BSTNode):
         #find min in right sub-tree, to keep in-order invariant
         moving_nowhere_node = min(node.right)
         #replace keys with node to be removed
-        node.key = moving_nowhere_node.key
+        new_key = moving_nowhere_node.key
         #delete that min in right sub-tree
-        return delete(moving_nowhere_node)
+        ret = delete(moving_nowhere_node)
+        node.key = new_key
+        return ret
 
 
 # update height all the way up
