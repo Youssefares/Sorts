@@ -79,3 +79,10 @@ def delete(node: BSTNode):
         node.key = moving_nowhere_node.key
         #delete that min in right sub-tree
         return delete(moving_nowhere_node)
+
+
+# update height all the way up
+def update_heights(node):
+    while (node is not None):
+        node.update_height()
+        node = node.parent

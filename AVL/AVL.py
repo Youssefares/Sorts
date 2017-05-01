@@ -58,9 +58,6 @@ class AVL(BST):
                 rightright(node)
             else:
                 rightleft(node)
-        self.update_heights(self, node)
-
-
 
 
     def print_height(self):
@@ -74,6 +71,7 @@ def leftleft(node):
     k1.right = k2
     k1.parent = k2.parent
     k2.parent = k1
+    update_heights(k2)
 
 def rightright(node):
     k1 = node
@@ -82,6 +80,7 @@ def rightright(node):
     k2.left = k1
     k2.parent = k1.parent
     k1.parent = k2
+    update_heights(k1)
 
 def leftright(node):
     k1 = node.left
@@ -93,6 +92,8 @@ def leftright(node):
     k2.right = k3
     k2.parent = k3.parent
     k1.parent = k3.parent = k2
+    update_heights(k1)
+    update_heights(k3)
 
 def rightleft(node):
     k1 = node
@@ -104,3 +105,5 @@ def rightleft(node):
     k2.right = k3
     k2.parent = k1.parent
     k1.parent = k2.parent = k2
+    update_heights(k1)
+    update_heights(k3)
