@@ -46,6 +46,7 @@ class AVL(BST):
         while node is not None:
             if abs(node.get_balance()) > 1:
                 break
+            node = node.parent
         if node is None:
             return
 
