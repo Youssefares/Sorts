@@ -31,12 +31,18 @@ class BST:
                     continue
 
             #update height all the way up
-            while(node is not None):
-                node.update_height()
-                node = node.parent
+            # while(node is not None):
+            #     node.update_height()
+            #     node = node.parent
+            self.update_heights(self, node)
 
             return ret
 
+    # update height all the way up
+    def update_heights(self, node):
+        while (node is not None):
+            node.update_height()
+            node = node.parent
 
     def find(self,key)->BSTNode:
         return find(self.root, key)

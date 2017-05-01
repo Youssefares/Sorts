@@ -9,8 +9,8 @@ class BSTNode:
     def update_height(self):
         self.height = max(height(self.left), height(self.right)) + 1
 
-    def is_balanced(self):
-        return abs(height(self.left)-height(self.right)) <= 1
+    def get_balance(self):
+        return height(self.left) - height(self.right)
 
 
 # outside class to define the useful case that is height(nil/none/none) = -1
