@@ -15,21 +15,27 @@ class BST:
         #else find right place and right parent
         else:
             node = self.root
+            ret = None
             for _ in range(height(self.root)+1):
                 if key > node.key and node.right == None:
-                    node.right = BSTNode(key, None, None, node)
+                    ret = node.right = BSTNode(key, None, None, node)
+                    break
                 elif key > node.key:
                     node = node.right
                     continue
                 elif key < node.key and node.left == None:
-                    node.left = BSTNode(key, None, None, node)
+                    ret = node.left = BSTNode(key, None, None, node)
+                    break
                 elif key < node.key:
                     node = node.left
+                    continue
 
             #update height all the way up
             while(node is not None):
                 node.update_height()
                 node = node.parent
+
+            return ret
 
 
     def find(self,key)->BSTNode:
