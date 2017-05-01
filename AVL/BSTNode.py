@@ -82,7 +82,7 @@ def delete(node: BSTNode):
 
 
 # update height all the way up
-def update_heights(node):
+def update_heights(node: BSTNode):
     while (node is not None):
         node.update_height()
         node = node.parent
