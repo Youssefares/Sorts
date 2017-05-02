@@ -7,7 +7,8 @@
 # [x] 6. Batch look-up
 # [x] 7. Batch deletion
 
-from AVL.AVL import AVL
+from AVL.AVLTree import AVL
+from BST_invariant import is_in_order
 
 
 class Dictionary:
@@ -18,13 +19,16 @@ class Dictionary:
     def load_dictionary(self, filename):
         with open(filename) as file:
             for line in file:
-                self.insert_word(self, line.strip())
+                self.insert_word(line)
+                print(is_in_order(self.tree))
 
     def insert_word(self, word):
-        if self.lookup_word(self, word):
-            print("Error: Word already in dictionary.")
+        if self.lookup_word(word):
+            print("Error: Word already in dictionary - ", word)
         else:
             self.tree.insert(word)
+            self.size += 1
+            print("Word insert successful - ", word)
 
     def lookup_word(self, word):
         return self.tree.find(word) is not None
@@ -53,3 +57,9 @@ class Dictionary:
 
     def print_size(self):
         print("Dictionary size: ", self.size)
+
+
+
+stupid_dictionary = Dictionary()
+stupid_dictionary.load_dictionary("dictionary.txt")
+print("Load successful")

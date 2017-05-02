@@ -70,6 +70,8 @@ def leftleft(node):
     k1 = node.left
     k2 = node
     k2.left = k1.right
+    if k2.left is not None:
+        k2.left.parent = k2
     k1.right = k2
     k1.parent = k2.parent
     k2.parent = k1
@@ -79,6 +81,8 @@ def rightright(node):
     k1 = node
     k2 = node.right
     k1.right = k2.left
+    if k1.right is not None:
+        k1.right.parent = k1
     k2.left = k1
     k2.parent = k1.parent
     k1.parent = k2
@@ -89,7 +93,11 @@ def leftright(node):
     k2 = node.left.right
     k3 = node
     k1.right = k2.left
+    if k1.right is not None:
+        k1.right.parent = k1
     k3.left = k2.right
+    if k3.left is not None:
+        k3.left.parent = k3
     k2.left = k1
     k2.right = k3
     k2.parent = k3.parent
@@ -102,7 +110,11 @@ def rightleft(node):
     k2 = node.right.left
     k3 = node.right
     k1.right = k2.left
+    if k1.right is not None:
+        k1.right.parent = k1
     k3.left = k2.right
+    if k3.left is not None:
+        k3.left.parent = k3
     k2.left = k1
     k2.right = k3
     k2.parent = k1.parent
