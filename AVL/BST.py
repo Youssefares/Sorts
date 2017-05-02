@@ -55,11 +55,11 @@ class BST:
     def delete(self, key)->bool:
         result = find(self.root, key)
         if result == None:
-            return False
+            return None
         else:
             node = delete(result)
             update_heights(node)
-            return True
+            return node
 
     def __iter__(self):
         self.stack = []

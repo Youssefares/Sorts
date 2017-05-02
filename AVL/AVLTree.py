@@ -39,16 +39,6 @@ class AVL(BST):
             return
 
         self.rebalance(node)
-        # if height(node.left) > height(node.right):
-        #     if height(node.left.left) >= height(node.left.right):
-        #         leftleft(node)
-        #     else:
-        #         leftright(node)
-        # elif height(node.right) > height(node.left):
-        #     if height(node.right.right) >= height(node.right.left):
-        #         rightright(node)
-        #     else:
-        #         rightleft(node)
 
 
     def print_height(self):
@@ -84,7 +74,7 @@ class AVL(BST):
         else:
             if node.isLeftChild():
                 node.parent.left = k2
-            elif node.isRightChilde():
+            elif node.isRightChild():
                 node.parent.right = k2
         k2.left = k1
         k1.parent = k2
