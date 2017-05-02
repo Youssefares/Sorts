@@ -12,6 +12,12 @@ class BSTNode:
     def get_balance(self):
         return height(self.left) - height(self.right)
 
+    def isLeftChild(self):
+        return self.parent.left is self
+
+    def isRightChild(self):
+        return self.parent.right is self
+
 
 # outside class to define the useful case that is height(nil/none/none) = -1
 # makes code simpler and corner-case free everywhere else.

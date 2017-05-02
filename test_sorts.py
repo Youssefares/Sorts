@@ -3,22 +3,23 @@ import unittest
 import time
 import random
 from random import randint
-
+import sys
+sys.path.append("..")
 #our stuff
-from AVL.BST import BST
-from AVL.AVL import AVL
-from Merge.merge_sort import merge_sort
-from is_sorted import is_sorted
+from AVL.AVLTree import AVL
+# from Merge.merge_sort import merge_sort
+# from is_sorted import is_sorted
 from BST_invariant import is_in_order
-from min_heap_invariant import is_min_heap
-from PriorityQ.min_heap import MinHeap
+# from min_heap_invariant import is_min_heap
+# from PriorityQ.min_heap import MinHeap
+
 
 class BSTTestCase(unittest.TestCase):
 
     #get random numbers, their min & max, and insert them in the BST.
     def setUp(self):
         #TODO: replace this with self.tree = AVL(), and pass all tests
-        self.tree = BST()
+        self.tree = AVL()
         #TODO: replace this with actual testcases
         self.arr = random.sample(range(1,1000), 20)
         self.min = self.max = self.arr[0]

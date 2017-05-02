@@ -28,7 +28,7 @@ class Dictionary:
         else:
             self.tree.insert(word)
             self.size += 1
-            print("Word insert successful - ", word)
+            # print("Word insert successful - ", word)
 
     def lookup_word(self, word):
         return self.tree.find(word) is not None

@@ -25,19 +25,7 @@ class AVL(BST):
         if node is None:
             return inserted_node
 
-        balance_diff = node.get_balance()
-        if balance_diff > 1 and inserted_node.key < node.left.key:
-            ##leftleft
-            leftleft(node)
-        elif balance_diff < 1 and inserted_node.key > node.right.key:
-            ##rightright
-            rightright(node)
-        elif balance_diff > 1 and inserted_node.key > node.left.key:
-            ##leftright
-            leftright(node)
-        elif balance_diff < 1 and inserted_node.key < node.right.key:
-            ##rightleft
-            rightleft(node)
+        self.rebalance(node)
 
         return inserted_node
 
@@ -50,74 +38,70 @@ class AVL(BST):
         if node is None:
             return
 
-        if height(node.left) > height(node.right):
-            if height(node.left.left) >= height(node.left.right):
-                leftleft(node)
-            else:
-                leftright(node)
-        elif height(node.right) > height(node.left):
-            if height(node.right.right) >= height(node.right.left):
-                rightright(node)
-            else:
-                rightleft(node)
+        self.rebalance(node)
+        # if height(node.left) > height(node.right):
+        #     if height(node.left.left) >= height(node.left.right):
+        #         leftleft(node)
+        #     else:
+        #         leftright(node)
+        # elif height(node.right) > height(node.left):
+        #     if height(node.right.right) >= height(node.right.left):
+        #         rightright(node)
+        #     else:
+        #         rightleft(node)
 
 
     def print_height(self):
         print("Tree's height = ", height(self.root))
 
+    def right_rotate(self, node):
+        k1 = node.left
+        k2 = node
+        k2.left = k1.right
+        if k2.left is not None:
+            k2.left.parent = k2
+        k1.parent = k2.parent
+        if node is self.root:
+            self.root = k1
+        else:
+            if node.isLeftChild():
+                node.parent.left = k1
+            elif node.isRightChild():
+                node.parent.right = k1
+        k1.right = k2
+        k2.parent = k1
+        update_heights(k2)
 
-def leftleft(node):
-    k1 = node.left
-    k2 = node
-    k2.left = k1.right
-    if k2.left is not None:
-        k2.left.parent = k2
-    k1.right = k2
-    k1.parent = k2.parent
-    k2.parent = k1
-    update_heights(k2)
+    def left_rotate(self, node):
+        k1 = node
+        k2 = node.right
+        k1.right = k2.left
+        if k1.right is not None:
+            k1.right.parent = k1
+        k2.parent = k1.parent
+        if node is self.root:
+            self.root = k2
+        else:
+            if node.isLeftChild():
+                node.parent.left = k2
+            elif node.isRightChilde():
+                node.parent.right = k2
+        k2.left = k1
+        k1.parent = k2
+        update_heights(k1)
 
-def rightright(node):
-    k1 = node
-    k2 = node.right
-    k1.right = k2.left
-    if k1.right is not None:
-        k1.right.parent = k1
-    k2.left = k1
-    k2.parent = k1.parent
-    k1.parent = k2
-    update_heights(k1)
+    def rebalance(self, node):
+        balance_diff = node.get_balance()
+        if balance_diff > 1:
+            if node.left.get_balance() >= 1:
+                self.right_rotate(node)
+            else:
+                self.left_rotate(node.left)
+                self.right_rotate(node)
+        elif balance_diff < -1:
+            if node.right.get_balance() <= -1:
+                self.left_rotate(node)
+            else:
+                self.right_rotate(node.right)
+                self.left_rotate(node)
 
-def leftright(node):
-    k1 = node.left
-    k2 = node.left.right
-    k3 = node
-    k1.right = k2.left
-    if k1.right is not None:
-        k1.right.parent = k1
-    k3.left = k2.right
-    if k3.left is not None:
-        k3.left.parent = k3
-    k2.left = k1
-    k2.right = k3
-    k2.parent = k3.parent
-    k1.parent = k3.parent = k2
-    update_heights(k1)
-    update_heights(k3)
-
-def rightleft(node):
-    k1 = node
-    k2 = node.right.left
-    k3 = node.right
-    k1.right = k2.left
-    if k1.right is not None:
-        k1.right.parent = k1
-    k3.left = k2.right
-    if k3.left is not None:
-        k3.left.parent = k3
-    k2.left = k1
-    k2.right = k3
-    k2.parent = k1.parent
-    k1.parent = k2.parent = k2
-    update_heights(k1)
-    update_heights(k3)
