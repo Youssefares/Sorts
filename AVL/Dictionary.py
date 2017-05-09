@@ -1,11 +1,11 @@
 # TODO:
-# [x] 1. Load dictionary
-# [x] 2. Print size
-# [x] 3. Insert word
-# [x] 4. Look-up word
-# [x] 5. Remove word
-# [x] 6. Batch look-up
-# [x] 7. Batch deletion
+# [xx] 1. Load dictionary
+# [xx] 2. Print size
+# [xx] 3. Insert word
+# [xx] 4. Look-up word
+# [xx] 5. Remove word
+# [xx] 6. Batch look-up
+# [xx] 7. Batch deletion
 
 from AVL.AVLTree import AVL
 from BST_invariant import is_in_order
@@ -25,10 +25,12 @@ class Dictionary:
     def insert_word(self, word):
         if self.lookup_word(word):
             print("Error: Word already in dictionary - ", word)
+            return False
         else:
             self.tree.insert(word)
             self.size += 1
             print("Word insert successful - ", word)
+            return True
 
     def lookup_word(self, word):
         return self.tree.find(word) is not None
@@ -36,20 +38,26 @@ class Dictionary:
     def remove_word(self, word):
         if not self.lookup_word(word):
             print("Error: Word not found - ", word)
+            return False
         else:
             self.tree.delete(word)
+            self.size -= 1
             print("Word remove successful - ", word)
+            return True
 
     def batch_lookup(self, filename):
+        n_found = 0
         n = 0
         with open(filename) as file:
             for line in file:
-                if self.lookup_word(line.strip()):
+                if len(line.strip()) > 0:
                     n += 1
+                if self.lookup_word(line.strip()):
+                    n_found += 1
                     print(line.strip(), ": YES")
                 else:
                     print(line.strip(), ": NO")
-        print("Batch lookup finished. Number of words found = ", n)
+        print("Batch lookup finished. Number of words found = ", n_found, " out of ", n)
 
     def batch_delete(self, filename):
         with open(filename) as file:
@@ -90,11 +98,15 @@ if __name__ == '__main__':
         user_input = input()
         if user_input == "LOAD":
             my_dictionary.load_dictionary("dictionary.txt")
+            my_dictionary.print_size()
+            my_dictionary.tree.print_height()
         elif user_input == "SIZE":
             my_dictionary.print_size()
         elif user_input == "INSERT":
             word = input("Enter word:   ")
             my_dictionary.insert_word(word)
+            my_dictionary.print_size()
+            my_dictionary.tree.print_height()
         elif user_input == "LOOKUP":
             word = input("Enter word:   ")
             if my_dictionary.lookup_word(word):
@@ -103,13 +115,18 @@ if __name__ == '__main__':
         elif user_input == "REMOVE":
             word = input("Enter word:   ")
             my_dictionary.remove_word(word)
+            my_dictionary.print_size()
+            my_dictionary.tree.print_height()
         elif user_input == "BLOOKUP":
             my_dictionary.batch_lookup("queries.txt")
         elif user_input == "BREMOVE":
             my_dictionary.batch_delete("deletions.txt")
+            my_dictionary.print_size()
+            my_dictionary.tree.print_height()
         elif user_input == "EXIT":
             print("شرفتنا يا فندم")
             break
         else:
             print("Invalid command. Please try again.")
+            continue
         input(">>Press enter to continue<<\n")
